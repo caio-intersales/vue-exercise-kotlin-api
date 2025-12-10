@@ -1,54 +1,20 @@
 # user-api-exercise-frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+This simple project allows a user to user the endpoints from the RestAPI coded in Kotlin in another project. It brings a simple dashboard for managing users, products, and orders.
 
-## Recommended IDE Setup
+The features of the system are explained in the main page. The specific dashboards can be accessed in the menu.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## Users' dashboard
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+In the users' area, the user can see all users that are saved in the database (checking their first and last name as well as their email addresses). It is also possible to check each individual user. In this area, it is possible to either view all users or to create a new one. In the user's page, it is possible to edit their information or delete them.
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+| Screenshots |
+|-------------|
+| Home page ![Home page](screenshots/home.png) |
+| Users' dashboard ![Users' dashboard](screenshots/users_dashboard.png) |
+| Add new user ![Add new user](screenshots/add_new_user.png) |
+| Checking user data ![Checking user data](screenshots/checking_user_data.png) |
+| Delete user ![Delete user](screenshots/delete_user.png) |
+| Edit user ![Edit user](screenshots/edit_user.png) |
