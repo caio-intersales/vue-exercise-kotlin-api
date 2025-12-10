@@ -11,23 +11,39 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: { title: 'Home | User API App' }
     },
     {
       path: '/users',
       name: 'users',
-      component: UsersView
+      component: UsersView,
+      meta: { title: 'Users\' management | User API App' }
     },
     {
       path: '/products',
       name: 'products',
       component: ProductsView,
+      meta: { title: 'Products\' management | User API App' }
     },
     {
       path: '/orders',
       name: 'orders',
       component: OrdersView,
+      meta: { title: 'Orders\' management | User API App' }
     }
   ],
+})
+
+// Code needed for setting new titles for each page
+router.afterEach((to) => {
+  // Check if the current route has a title defined in its meta field
+  if(to.meta.title) {
+    // Set the document title to the value from meta.title
+    document.title = to.meta.title as string
+  }else{
+    // Optional: Set a default title if none is specified
+    document.title = "User Api - Frontend"
+  }
 })
 
 export default router
