@@ -8,6 +8,11 @@ import SpecificUserView from '@/views/users/SpecificUserView.vue'
 import EditUserView from '@/views/users/EditUserView.vue'
 import DeleteUserView from '@/views/users/DeleteUserView.vue'
 import AddUserView from '@/views/users/AddUserView.vue'
+import AllProductsView from '@/views/products/AllProductsView.vue'
+import AddProductView from '@/views/products/AddProductView.vue'
+import SpecificProductView from '@/views/products/SpecificProductView.vue'
+import EditProductView from '@/views/products/EditProductView.vue'
+import DeleteProductView from '@/views/products/DeleteProductView.vue'
 
 const appStandardTitle = '| User API App';
 
@@ -61,7 +66,38 @@ const router = createRouter({
       path: '/products',
       name: 'products',
       component: ProductsView,
-      meta: { title: 'Products\' management' + appStandardTitle }
+      children: [
+        {
+          path: '',
+          name: 'all-products',
+          component: AllProductsView,
+          meta: { title: `Products\' management ${appStandardTitle}` }     
+        },
+        {
+          path: 'add',
+          name: 'product-add',
+          component: AddProductView,
+          meta: { title : `Add a new product ${appStandardTitle}` } 
+        },
+        {
+          path: 'view/:id',
+          name: 'product-info',
+          component: SpecificProductView,
+          meta: { title: `Product information ${appStandardTitle}` }
+        },
+        {
+          path: 'edit/:id',
+          name: 'product-edit',
+          component: EditProductView,
+          meta: { title: `Editing product information ${appStandardTitle}` }
+        },
+        {
+          path: 'delete/:id',
+          name: 'product-delete',
+          component: DeleteProductView,
+          meta: { title: `Deleting product ${appStandardTitle}` }
+        }
+      ],       
     },
     {
       path: '/orders',

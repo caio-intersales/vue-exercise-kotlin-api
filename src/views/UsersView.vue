@@ -19,21 +19,3 @@ import IconUsers from '@/components/icons/IconUsers.vue';
         <RouterView />
     </main>
 </template>
-
-<style lang="css" scoped>
-    .top-icon {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    h2 {
-        font-weight: bold;
-    }
-    @media (max-width: 1200px) {
-        svg {
-            width: 50px;
-            margin-bottom: -50px;
-        }
-    }
-</style>

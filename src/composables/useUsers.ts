@@ -5,9 +5,6 @@ import { ref } from 'vue';
 // Interfaces
 // ==================================
 
-// The user inferface must be created here
-// Same as DTO from API endpoint
-
 export interface BasicUserData {
     firstName: string;
     lastName: string;
