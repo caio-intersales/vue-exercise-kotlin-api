@@ -14,8 +14,7 @@ import IconOrders from './components/icons/IconOrders.vue';
     <div class="wrapper">
       <GreetingHeader mainMsg="User API" subMsg="Use the menu bellow to naviage through the entities." />
 
-      <nav>
-        
+      <nav>        
         <RouterLink to="/" class="nav-item-vertical"><IconHome/> Home</RouterLink>
         <RouterLink to="/users" class="nav-item-vertical"><IconUsers/> Manage users</RouterLink>
         <RouterLink to="/products" class="nav-item-vertical"><IconProducts/> Manage products</RouterLink>
@@ -38,36 +37,7 @@ header {
   margin: 0 auto 2rem;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0.5rem;
-  border-radius: 10px;
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-a svg {
-  vertical-align: middle;
-}
-
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   header {
     display: inline-flex;
     flex-direction: column;
@@ -85,23 +55,6 @@ a svg {
     flex-wrap: wrap;
   }
 
-  nav {
-    align-items: center;
-    text-align: center;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-
-  .nav-item-vertical {
-    min-width: 50%;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    margin-top: 1rem;
-  }
+  
 }
 </style>

@@ -1,0 +1,66 @@
+.form-group {
+    margin-bottom: 1.5rem; 
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem; 
+    margin-bottom: 0.4rem;
+    color: var(--color-heading);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    box-sizing: border-box; 
+    
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 1rem;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
+    outline: none;
+}
+
+input:disabled {
+    background-color: var(--color-background-soft);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.error-message {
+    margin:10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid red;
+    background-color: rgb(224, 166, 166);
+    color: #521a1a;
+    font-weight: bold;
+}
+
+.delete-button {
+    background-color: darkred;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.delete-button:hover {
+    background-color: red;
+}

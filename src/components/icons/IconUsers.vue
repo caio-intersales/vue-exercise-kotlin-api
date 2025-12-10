@@ -1,5 +1,15 @@
+<script setup lang="ts">
+  const props = defineProps({
+    size: {
+      type: [String, Number],
+      default: 20,
+      required: false,
+    }
+  })
+</script>
+
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor">
+  <svg xmlns="http://www.w3.org/2000/svg" :width="props.size" :height="props.size" fill="currentColor" viewBox="0 0 20 20">
     <path
       d="M10 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM14.5 10a1.5 1.5 0 0 1 1.5 1.5v4A1.5 1.5 0 0 1 14.5 17h-9A1.5 1.5 0 0 1 4 15.5v-4A1.5 1.5 0 0 1 5.5 10h9zm-1.879 5.879a.5.5 0 0 0 .708 0l1.5-1.5a.5.5 0 0 0-.708-.708L13 14.793V11.5a.5.5 0 0 0-1 0v3.293l-.793-.793a.5.5 0 0 0-.708.708l1.5 1.5zM12 10a3 3 0 0 0-3 3v.5a.5.5 0 0 0 1 0V13a2 2 0 1 1 4 0v.5a.5.5 0 0 0 1 0V13a3 3 0 0 0-3-3z"
     />
