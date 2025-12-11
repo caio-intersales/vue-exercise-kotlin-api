@@ -21,21 +21,21 @@ export interface BasicOrderData {
 }
 
 // ==================================
-// Variables
-// ==================================
-
-const allOrders         = ref<Order[]>([]);
-const currentOrder      = ref<Order | null>(null);
-const loading           = ref(false);
-const error             = ref<string | null>(null);
-
-const apiUrl            = import.meta.env.VITE_BASE_API_URL;
-
-// ==================================
 // "Service" part
 // ==================================
 
 export function useOrders() {
+
+    // ==================================
+    // Variables
+    // ==================================
+
+    const allOrders         = ref<Order[]>([]);
+    const currentOrder      = ref<Order | null>(null);
+    const loading           = ref(false);
+    const error             = ref<string | null>(null);
+
+    const apiUrl            = import.meta.env.VITE_BASE_API_URL;
 
     /**
      * Function to fetch all orders from API
