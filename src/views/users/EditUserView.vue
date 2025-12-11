@@ -95,7 +95,7 @@ watch(() => route.params.id, (newId) => {
 </script>
 
 <template>
-    <div class="container">
+    <div>
         <h2>Edit user</h2>
 
         <UserForm 
