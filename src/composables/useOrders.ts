@@ -15,12 +15,9 @@ export interface Order {
 }
 
 export interface BasicOrderData {
+    id?: number;
     orderOwner: number;
     orderProducts: Product[];
-}
-
-export interface UpdateOrder extends BasicOrderData {
-    id: number;
 }
 
 // ==================================

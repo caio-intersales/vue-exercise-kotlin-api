@@ -86,6 +86,8 @@ const handleSubmit = () => {
             {{ props.loading ? 'Processing...' : props.submitText }}
         </button>
 
-        <p v-if="props.error" class="error-message">Error: {{ props.error }}</p>
+        <p v-if="props.error" class="error-message">
+            Error: {{ props.error }}
+        </p>
     </form>
 </template>

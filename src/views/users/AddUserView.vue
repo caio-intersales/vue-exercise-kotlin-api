@@ -47,7 +47,7 @@ const handleSubmit = async (formData: FormInputData) => {
 </script>
 
 <template>
-    <div class="container">
+    <div>
         <h2>Add new user</h2>
 
         <UserForm 
