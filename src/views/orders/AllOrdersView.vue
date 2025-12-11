@@ -23,7 +23,7 @@ onMounted(() => {
         <p v-else-if="error">Error: {{ error }}</p>
 
         <p v-else-if="allOrders.length == 0">
-            There are no users in the system yet :/
+            There are no orders in the system yet :/
         </p>
         <table class="info-table" v-else>
             <tr>
@@ -42,7 +42,11 @@ onMounted(() => {
                     <span v-else><i>No name provided</i></span>
                 </td>
                 <td align="center">
-                    <RouterLink :to="{ name: 'order-info', params: { id: order.id} }" title="Open order information"><img src="@/assets/see.png" width="20" /></RouterLink>
+                    <RouterLink
+                    :to="{ name: 'order-info', params: { id: order.id} }"
+                    title="Open order information">
+                        <img src="@/assets/see.png" width="20" />
+                    </RouterLink>
                 </td>
             </tr>
         </table>
