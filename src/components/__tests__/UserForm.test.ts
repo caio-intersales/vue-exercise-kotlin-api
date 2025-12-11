@@ -1,5 +1,3 @@
-// UserForm.test.ts
-
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount } from '@vue/test-utils';
 import UserForm from '../UserForm.vue';

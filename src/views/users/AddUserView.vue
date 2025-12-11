@@ -44,6 +44,11 @@ const handleSubmit = async (formData: FormInputData) => {
         });
     }
 };
+
+// === Added for tests
+defineExpose({
+    handleSubmit
+});
 </script>
 
 <template>
