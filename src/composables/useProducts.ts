@@ -16,21 +16,21 @@ export interface Product extends BasicProductData {
 }
 
 // ==================================
-// Variables
-// ==================================
-
-const allProducts       = ref<Product[]>([]);
-const currentProduct    = ref<Product | null>(null);
-const loading           = ref(false);
-const error             = ref<string | null>(null);
-
-const apiUrl            = import.meta.env.VITE_BASE_API_URL;
-
-// ==================================
 // "Service" part
 // ==================================
 
 export function useProducts() {
+
+    // ==================================
+    // Variables
+    // ==================================
+
+    const allProducts       = ref<Product[]>([]);
+    const currentProduct    = ref<Product | null>(null);
+    const loading           = ref(false);
+    const error             = ref<string | null>(null);
+
+    const apiUrl            = import.meta.env.VITE_BASE_API_URL;
 
     /**
      * Function to fetch all products from API
