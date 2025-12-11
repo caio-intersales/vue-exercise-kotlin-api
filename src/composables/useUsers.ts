@@ -29,7 +29,7 @@ const currentUser   = ref<User | null>(null);
 const loading       = ref(false);
 const error         = ref<string | null>(null);
 
-const apiUrl        = "http://localhost:8080/api";
+const apiUrl        = import.meta.env.VITE_BASE_API_URL;
 
 // ==================================
 // "Service" part
@@ -155,7 +155,7 @@ export function useUsers() {
     }
 
     /**
-     * Function to delete an user based on their ID using DELETE
+     * Function to delete a user based on their ID using DELETE
      */
     const deleteUser = async (id: number) => {
         loading.value   = true;
@@ -181,7 +181,7 @@ export function useUsers() {
         }
     }
 
-    // Return the reactive data and the function to use in your component
+    // Return the reactive data and the functions to use in the component
     return {
         allUsers,
         currentUser,
