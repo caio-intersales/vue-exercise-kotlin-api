@@ -21,21 +21,21 @@ export interface User extends BasicUserData {
 }
 
 // ==================================
-// Variables
-// ==================================
-
-const allUsers      = ref<User[]>([]);
-const currentUser   = ref<User | null>(null);
-const loading       = ref(false);
-const error         = ref<string | null>(null);
-
-const apiUrl        = import.meta.env.VITE_BASE_API_URL;
-
-// ==================================
 // "Service" part
 // ==================================
 
 export function useUsers() {   
+
+    // ==================================
+    // Variables
+    // ==================================
+
+    const allUsers      = ref<User[]>([]);
+    const currentUser   = ref<User | null>(null);
+    const loading       = ref(false);
+    const error         = ref<string | null>(null);
+
+    const apiUrl        = import.meta.env.VITE_BASE_API_URL;
 
     /**
      * Function to fetch all users from API
