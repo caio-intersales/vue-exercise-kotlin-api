@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useProducts, BasicProductData } from '@/composables/useProducts';
+import ProductForm from '@/components/ProductForm.vue';
+import { useProducts, type BasicProductData } from '@/composables/useProducts';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -42,6 +43,13 @@ const handleSubmit = async (formData: BasicProductData) => {
     <div class="container">
         <h2>Add new product</h2>
 
-        
+        <ProductForm
+            mode="create"
+            :initial-data="initialFormState"
+            :loading="loading"
+            :error="error"
+            submit-text="Add new product"
+            @submit-form="handleSubmit"
+        />
     </div>
 </template>

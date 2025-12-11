@@ -47,23 +47,26 @@ const handleSubmit = () => {
 <template>
     <form @submit.prevent="handleSubmit">
         <div class="form-group">
-            <label for="firstName">Product name:</label>
-            <input id="firstName" v-model="formState.productName" type="text" required>
+            <label for="productName">Product name:</label>
+            <input id="productName" v-model="formState.productName" type="text" required>
         </div>
 
         <div class="form-group">
-            <label for="firstName">Product type:</label>
-            <input id="firstName" v-model="formState.productType" type="number" required>
+            <label for="productType">Product type:</label>
+            <input id="productType" v-model="formState.productType" type="number" required>
         </div>
 
         <div class="form-group">
-            <label for="firstName">Price ($):</label>
-            <input id="firstName" v-model="formState.productPrice" type="number" required>
+            <label for="productPrice">Price ($):
+                <br><small>
+                    <i>Use a . to separate decimals (ex. 9.99).</i>
+                </small></label>
+            <input id="productPrice" v-model="formState.productPrice" type="number" required step="0.01" min="0">
         </div>
 
         <div class="form-group">
-            <label for="firstName">How many is there in storage:</label>
-            <input id="firstName" v-model="formState.productQnt" type="number" required>
+            <label for="productQnt">How many is there in storage:</label>
+            <input id="productQnt" v-model="formState.productQnt" type="number" required>
         </div>
 
         <input id="id" v-if="props.mode === 'edit'" type="hidden" v-model="formState.id" />
