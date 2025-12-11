@@ -89,9 +89,11 @@ onMounted(() => {
 
 watch(
     () => route.params.id,
-    (newId) => loadUser(newId),
-    { immediate: false }
-);
+    (newId) => {
+    if(newId) {
+        loadUser(newId);
+    }
+});
 </script>
 
 <template>
