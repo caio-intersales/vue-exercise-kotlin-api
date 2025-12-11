@@ -7,7 +7,7 @@ import { ref } from "vue";
 export interface BasicProductData {
     productName: string;
     productType: number;
-    productPrice: DoubleRange;
+    productPrice: number;
     productQnt: number;
 }
 

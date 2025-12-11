@@ -36,6 +36,7 @@ const handleSubmit = async (formData: FormInputData) => {
     const createdUser = await createUser(formData as NewUser);
 
     if (createdUser) {
+        alert("User added successfully! You'll be redirected to the user's page.")
         // 3. Redirection on success
         router.push({ 
             name: 'user-info',
