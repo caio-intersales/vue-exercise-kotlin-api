@@ -13,6 +13,11 @@ import AddProductView from '@/views/products/AddProductView.vue'
 import SpecificProductView from '@/views/products/SpecificProductView.vue'
 import EditProductView from '@/views/products/EditProductView.vue'
 import DeleteProductView from '@/views/products/DeleteProductView.vue'
+import AllOrdersView from '@/views/orders/AllOrdersView.vue'
+import AddOrderView from '@/views/orders/AddOrderView.vue'
+import SpecificOrderView from '@/views/orders/SpecificOrderView.vue'
+import EditOrderView from '@/views/orders/EditOrderView.vue'
+import DeleteOrderView from '@/views/orders/DeleteOrderView.vue'
 
 const appStandardTitle = '| User API App';
 
@@ -103,7 +108,38 @@ const router = createRouter({
       path: '/orders',
       name: 'orders',
       component: OrdersView,
-      meta: { title: 'Orders\' management' + appStandardTitle }
+      children: [
+        {
+          path: '',
+          name: 'all-orders',
+          component: AllOrdersView,
+          meta: { title: `Orders\' management ${appStandardTitle}` }     
+        },
+        {
+          path: 'add',
+          name: 'order-add',
+          component: AddOrderView,
+          meta: { title : `Add a new order ${appStandardTitle}` } 
+        },
+        {
+          path: 'view/:id',
+          name: 'order-info',
+          component: SpecificOrderView,
+          meta: { title: `Order information ${appStandardTitle}` }
+        },
+        {
+          path: 'edit/:id',
+          name: 'order-edit',
+          component: EditOrderView,
+          meta: { title: `Editing order information ${appStandardTitle}` }
+        },
+        {
+          path: 'delete/:id',
+          name: 'order-delete',
+          component: DeleteOrderView,
+          meta: { title: `Deleting order ${appStandardTitle}` }
+        }
+      ],       
     }
   ],
 })
