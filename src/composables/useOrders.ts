@@ -16,8 +16,8 @@ export interface Order {
 
 export interface BasicOrderData {
     id?: number;
-    orderOwner: number;
-    orderProducts: Product[];
+    orderOwner: number | null;
+    orderProducts: number[];
 }
 
 // ==================================
@@ -122,7 +122,7 @@ export function useOrders() {
     /**
      * Function to edit an existing order sending a Order obj using PUT
      */
-    const editOrder = async (order: Order) => {
+    const editOrder = async (order: BasicOrderData) => {
         loading.value       = true;
         error.value         = null;
         currentOrder.value  = null;
