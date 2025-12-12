@@ -45,7 +45,38 @@ export function useDateFormatter() {
         return new Intl.DateTimeFormat(locale, options).format(date);
     };
 
+    /**
+     * This formats an ISO date string into a dd/mm/yyyy without the time
+     */
+    const formatOnlyDate = (
+        isoString: string,
+        config: DateFormatOptions = {}
+    ): string => {
+        // Set default to DD/MM/YYYY format
+        const locale = config.locale || 'en-GB';
+
+        // Define the default output format (dd/mm/yyyy)
+        const defaultOptions: Intl.DateTimeFormatOptions = {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        };
+
+        const options = config.options || defaultOptions;
+
+        // Create the Date object
+        const date = new Date(isoString);
+
+        // Handle invalid dates
+        if(isNaN(date.getTime())){
+            return 'Invalid Date';
+        }
+
+        return new Intl.DateTimeFormat(locale, options).format(date);
+    }
+
     return {
-        formatDate
+        formatDate,
+        formatOnlyDate
     };
 }

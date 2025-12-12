@@ -155,7 +155,7 @@ const router = createRouter({
               meta: { title: `Search by Issuer ${appStandardTitle}` }
             },
             {
-              path: 'date',
+              path: '',
               name: 'order-serch-date',
               component: SearchDateOrderView,
               meta: { title: `Search by Date ${appStandardTitle}` }

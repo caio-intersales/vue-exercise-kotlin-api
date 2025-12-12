@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DateForm from '@/components/DateForm.vue';
 import { useOrders, type Order, type OrderDataByDate } from '@/composables/useOrders';
-import { OrdersInjectionKey } from '@/keys/order-keys';
+import { EndDateKey, OrdersInjectionKey, SearchAttemptedKey, StartDateKey } from '@/keys/order-keys';
 import { provide, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -28,8 +28,15 @@ const currentOwnerId = ref(route.params.ownerId);
 
 // Define a reactive state to hold the data from searches that will be accessible for children
 // Then provide the state to the descendents, making it accessible
-const externalOrders = ref<Order[] | null>(null);
+const externalOrders    = ref<Order[] | null>(null);
+const searchAttempted   = ref(false);
+const currentStartDate  = ref<string | null>(null);
+const currentEndDate    = ref<string | null>(null);
+
 provide(OrdersInjectionKey, externalOrders);
+provide(SearchAttemptedKey, searchAttempted);
+provide(StartDateKey, currentStartDate);
+provide(EndDateKey, currentEndDate);
 
 // Watch for changes in the route name (page change)
 watch(() => route.name, (newName) => {
@@ -48,8 +55,13 @@ watch(() => route.params.ownerId, (newId) => {
 
 // Function to handleSubmit
 const handleSubmit = async (formData: OrderDataByDate) => {
+    // Update the search attempt
+    searchAttempted.value = true;
 
-    let success: boolean = false;
+    // Update the dates that have been sent
+    currentStartDate.value  = formData.startDate || null;
+    currentEndDate.value    = formData.endDate || null;
+
     let fetchedData: Order[] | null = null;
     
     // Call the right composable
