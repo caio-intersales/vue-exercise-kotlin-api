@@ -66,3 +66,14 @@ input:disabled {
 .delete-button:hover {
     background-color: red;
 }
+
+.date-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 3fr;
+    gap: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #CCC;
+    padding: 10px;
+    border-right: none;
+    border-left: none;
+}

@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { useDateFormatter } from '@/composables/useDateFormatter';
-import { useOrders } from '@/composables/useOrders';
+import { useOrders, type Order } from '@/composables/useOrders';
 import { useUsers } from '@/composables/useUsers';
-import { onMounted } from 'vue';
+import { OrdersInjectionKey } from '@/keys/order-keys';
+import { computed, inject, onMounted, ref, watch, type Ref } from 'vue';
 import { useRoute } from 'vue-router';
 
+// ======================
+// Declare constants
+// ======================
 
 const route = useRoute();
 
@@ -24,36 +28,61 @@ const {
 
 const { formatDate } = useDateFormatter();
 
+const dataFromParent = ref(false);
+
+// =========================================================
+// Inject states shared from parent (orders from search)
+// But only update if there is new data from the parent
+// =========================================================
+
+const injectedOrdersRef = inject(OrdersInjectionKey) as Ref<Order[] | null> | undefined;
+
+const ordersToDisplay = computed<Order[]>(() => { // List that rellies on the injected state
+
+    if(injectedOrdersRef?.value) {
+        dataFromParent.value = true;
+        return injectedOrdersRef.value;
+    }
+
+    dataFromParent.value = false;    
+    return ordersByOwner.value;
+});
+
+// =============================
 // Functions that calls API
+// =============================
 
 const loadUser = (id: string) => {
     fetchUserById(parseInt(id));
 }
 
 const loadOrders = (owner: string) => {
-    fetchOrdersByOwner(parseInt(owner), null);
+    fetchOrdersByOwner(owner, null);
 }
-
-// Define a variable to advise about not triggering loadOrders, when no User ID is provided
-let canShowOrders = false;
 
 onMounted(() => {
     loadUser(route.params.ownerId as string);
 
     loadOrders(route.params.ownerId as string);  
 });
+
 </script>
 
 <template>
-    <div>
+    <div v-if="currentUser?.id == undefined">
+        Issuer ID was not provided or is invalid.
+    </div>
+    <div v-else>
         <h2>All Orders from Issuer "{{ currentUser?.firstName }} {{ currentUser?.lastName }}"</h2>
 
         <p v-if="ordersLoading">Loading data from user's orders...</p>
         <p v-else-if="ordersError">Error: {{ ordersError }}</p>
 
-        <p v-else-if="canShowOrders">Issuer ID was not provided.</p>
+        <p v-else-if="ordersToDisplay.length == 0 && dataFromParent">
+            No orders from the user were found in the date range provided.
+        </p>
 
-        <p v-else-if="ordersByOwner.length == 0">
+        <p v-else-if="ordersToDisplay.length == 0">
             This user hasn't made any orders.
         </p>
         <table class="info-table" v-else>
@@ -63,7 +92,7 @@ onMounted(() => {
                 <td width="50">Issuer</td>
                 <td width="10%" align="center">See details</td>
             </tr>
-            <tr v-for="order in ordersByOwner" :key="order.id">
+            <tr v-for="order in ordersToDisplay" :key="order.id">
                 <td>{{ order.id }}</td>
                 <td>{{ formatDate(order.issueDate) }}</td>
                 <td>

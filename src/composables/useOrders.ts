@@ -40,6 +40,7 @@ export function useOrders() {
 
     const allOrders         = ref<Order[]>([]);
     const ordersByOwner     = ref<Order[]>([]);
+    const ordersByDate      = ref<Order[]>([]);
     const currentOrder      = ref<Order | null>(null);
     const loading           = ref(false);
     const error             = ref<string | null>(null);
@@ -74,15 +75,18 @@ export function useOrders() {
      * @param owner = the owner (issuer) ID which must be given to look for their orders
      * @param dateOrder = start or end date (optional)
      */
-    const fetchOrdersByOwner = async (owner: number, dateData: OrderDataByDate | null = null) => {
+    const fetchOrdersByOwner = async (owner: string, dateData: OrderDataByDate | null = null) => {
         loading.value       = true;
         error.value         = null;
+        let data: Order[] | null = null;
+
+        const ownerNumber   = parseInt(owner);
 
         // Define an empty JSON-able payload in case of no Dates passed
         const bodyPayload: RequestBody = dateData !== null ? dateData : {};
 
         try {
-            const response = await fetch(`${apiUrl}/orders/show/owner/${owner}`, {
+            const response = await fetch(`${apiUrl}/orders/show/owner/${ownerNumber}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -91,17 +95,54 @@ export function useOrders() {
             });
 
             if(response.status !== 201 && response.status !== 200) {
-                throw new Error(`HTTP error! Status: ${response.status}.`)
+                throw new Error(`HTTP error! Status: ${response.status}. `)
             }
 
-            const data: Order[] = await response.json();
-            ordersByOwner.value = data;
+            data = await response.json();
+            ordersByOwner.value = data!;
         } catch(err: any) {
             console.error(err);
-            error.value = err.message || `Failed to fetch orders from user with ID ${owner}.`;
+            error.value = err.message || `Failed to fetch orders from user with ID ${ownerNumber}.`;
         } finally {
             loading.value = false;
         }
+
+        return data;
+    }
+
+    /**
+     * Function to fetch orders based on date only
+     * @param dateOrder = object with start or end dates (or both)
+     */
+    const fetchOrdersByDate = async (dateData: OrderDataByDate) => {
+        loading.value   = true;
+        error.value     = null;
+
+        let data: Order[] | null = null;
+
+        try {
+            const response = await fetch(`${apiUrl}/orders/show/time_range`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dateData)
+            });
+
+            if(response.status !== 201 && response.status !== 200){
+                throw new Error(`HTTP error! Status: ${response.status}.`)
+            }
+
+            data = await response.json();
+            ordersByDate.value = data!;
+        } catch(err: any) {
+            console.error(err);
+            error.value = err.message || `Failed to fetch orders for the given dates.`;
+        } finally {
+            loading.value = false;
+        }
+
+        return data;
     }
 
     /**
@@ -228,6 +269,7 @@ export function useOrders() {
     return {
         ordersByOwner,
         allOrders,
+        ordersByDate,
         currentOrder,
         loading,
         error,
@@ -237,5 +279,6 @@ export function useOrders() {
         createOrder,
         editOrder,
         deleteOrder,
+        fetchOrdersByDate,
     }
 }
