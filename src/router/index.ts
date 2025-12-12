@@ -20,7 +20,7 @@ import EditOrderView from '@/views/orders/EditOrderView.vue'
 import DeleteOrderView from '@/views/orders/DeleteOrderView.vue'
 import SearchOwnerOrderView from '@/views/orders/SearchOwnerOrderView.vue'
 import SearchDateOrderView from '@/views/orders/SearchDateOrderView.vue'
-import SearchOrder from '@/views/orders/SearchOrder.vue'
+import SearchOrderView from '@/views/orders/SearchOrderView.vue'
 
 const appStandardTitle = '| User API App';
 
@@ -145,7 +145,7 @@ const router = createRouter({
         {
           path: 'search',
           name: 'order-search',
-          component: SearchOrder,
+          component: SearchOrderView,
           meta: { title: `Search orders ${appStandardTitle}` },
           children: [
             {

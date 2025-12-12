@@ -123,4 +123,62 @@ describe('useDateFormatter Composable', () => {
             expect(result).toMatch(/^\d{2}\/\d{2}\/\d{4}, \d{1,2}:\d{2}$/);
         });
     });
+
+    // ===============================================================
+    // 4. Test formatOnlyDate Function
+    // ===============================================================
+    describe('formatOnlyDate Function', () => {
+        const isoString = '2025-11-08T10:15:30.000Z'; 
+
+        // 4.1 Test Default Formatting
+        it('should format a valid ISO string to DD/MM/YYYY using default en-GB locale', () => {
+            const result = store.formatOnlyDate(isoString);
+            
+            // Expected for en-GB default options: 08/11/2025
+            expect(result).toBe('08/11/2025');
+        });
+
+        // 4.2 Test Custom Locale
+        it('should format correctly using a custom locale (de-DE)', () => {
+            const result = store.formatOnlyDate(isoString, { locale: 'de-DE' });
+            
+            // Expected for de-DE default options: 08.11.2025
+            expect(result).toBe('08.11.2025');
+        });
+
+        // 4.3 Test Custom Options
+        it('should apply custom options to show full month and no year', () => {
+            const options: Intl.DateTimeFormatOptions = {
+                day: '2-digit',
+                month: 'long',
+                year: undefined, // Explicitly remove year
+            };
+
+            const result = store.formatOnlyDate(isoString, { locale: 'en-US', options });
+            
+            // Expected for en-US: November 08
+            expect(result).toBe('November 08');
+        });
+        
+        // 4.4 Test Date-Only String
+        it('should correctly format a date string without time data', () => {
+            const dateOnlyString = '2026-01-20'; 
+            const result = store.formatOnlyDate(dateOnlyString);
+            
+            expect(result).toBe('20/01/2026');
+        });
+
+        // 4.5 Test Error Handling
+        it('should return "Invalid Date" for an invalid string', () => {
+            const invalidString = 'bad-date-format';
+            const result = store.formatOnlyDate(invalidString);
+            expect(result).toBe('Invalid Date');
+        });
+
+        it('should return "Invalid Date" for an empty string', () => {
+            const emptyString = '';
+            const result = store.formatOnlyDate(emptyString);
+            expect(result).toBe('Invalid Date');
+        });
+    });
 });
