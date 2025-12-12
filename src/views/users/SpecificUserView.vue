@@ -63,6 +63,11 @@ watch(
 
         <div style="margin-top: 50px;">
             <p>
+                <RouterLink :to="{ name: 'order-search-owner', params: { ownerId: currentUser.id } }" title="See user's orders">
+                    <img src="@/assets/order.png" width="15" height="15" /> See their orders
+                </RouterLink>
+            </p>
+            <p>
                 <RouterLink :to="{ name: 'user-edit', params: { id: currentUser.id } }" title="Edit user information">
                     <img src="@/assets/edit.png" width="15" height="15" /> Edit information
                 </RouterLink>

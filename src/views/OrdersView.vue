@@ -15,6 +15,7 @@ import IconOrders from '@/components/icons/IconOrders.vue';
             <nav>
                 <RouterLink to="/orders">Show all</RouterLink>
                 <RouterLink to="/orders/add">Add new</RouterLink>
+                <RouterLink to="/orders/search">Search</RouterLink>
             </nav>
         </header>
 

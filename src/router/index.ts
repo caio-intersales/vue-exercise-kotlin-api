@@ -18,6 +18,9 @@ import AddOrderView from '@/views/orders/AddOrderView.vue'
 import SpecificOrderView from '@/views/orders/SpecificOrderView.vue'
 import EditOrderView from '@/views/orders/EditOrderView.vue'
 import DeleteOrderView from '@/views/orders/DeleteOrderView.vue'
+import SearchOwnerOrderView from '@/views/orders/SearchOwnerOrderView.vue'
+import SearchDateOrderView from '@/views/orders/SearchDateOrderView.vue'
+import SearchOrder from '@/views/orders/SearchOrder.vue'
 
 const appStandardTitle = '| User API App';
 
@@ -138,6 +141,26 @@ const router = createRouter({
           name: 'order-delete',
           component: DeleteOrderView,
           meta: { title: `Deleting order ${appStandardTitle}` }
+        },
+        {
+          path: 'search',
+          name: 'order-search',
+          component: SearchOrder,
+          meta: { title: `Search orders ${appStandardTitle}` },
+          children: [
+            {
+              path: 'owner/:ownerId',
+              name: 'order-search-owner',
+              component: SearchOwnerOrderView,
+              meta: { title: `Search by Issuer ${appStandardTitle}` }
+            },
+            {
+              path: 'date',
+              name: 'order-serch-date',
+              component: SearchDateOrderView,
+              meta: { title: `Search by Date ${appStandardTitle}` }
+            }
+          ]
         }
       ],       
     }

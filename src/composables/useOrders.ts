@@ -20,6 +20,14 @@ export interface BasicOrderData {
     orderProducts: number[];
 }
 
+export interface OrderDataByDate {
+    startDate: string | null;
+    endDate: string | null;
+}
+
+// Type for allowing request of orders from an issuer (owner) without dates
+type RequestBody = OrderDataByDate | {};
+
 // ==================================
 // "Service" part
 // ==================================
@@ -31,6 +39,7 @@ export function useOrders() {
     // ==================================
 
     const allOrders         = ref<Order[]>([]);
+    const ordersByOwner     = ref<Order[]>([]);
     const currentOrder      = ref<Order | null>(null);
     const loading           = ref(false);
     const error             = ref<string | null>(null);
@@ -55,6 +64,41 @@ export function useOrders() {
         } catch (err: any) {
             console.error(err);
             error.value = err.message || 'Failed to fetch orders.';
+        } finally {
+            loading.value = false;
+        }
+    }
+
+    /**
+     * Function to fetch orders based on the owner using their ID
+     * @param owner = the owner (issuer) ID which must be given to look for their orders
+     * @param dateOrder = start or end date (optional)
+     */
+    const fetchOrdersByOwner = async (owner: number, dateData: OrderDataByDate | null = null) => {
+        loading.value       = true;
+        error.value         = null;
+
+        // Define an empty JSON-able payload in case of no Dates passed
+        const bodyPayload: RequestBody = dateData !== null ? dateData : {};
+
+        try {
+            const response = await fetch(`${apiUrl}/orders/show/owner/${owner}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(bodyPayload)
+            });
+
+            if(response.status !== 201 && response.status !== 200) {
+                throw new Error(`HTTP error! Status: ${response.status}.`)
+            }
+
+            const data: Order[] = await response.json();
+            ordersByOwner.value = data;
+        } catch(err: any) {
+            console.error(err);
+            error.value = err.message || `Failed to fetch orders from user with ID ${owner}.`;
         } finally {
             loading.value = false;
         }
@@ -182,11 +226,13 @@ export function useOrders() {
 
     // Return the reactive data and functions to use in the component
     return {
+        ordersByOwner,
         allOrders,
         currentOrder,
         loading,
         error,
         fetchAllOrders,
+        fetchOrdersByOwner,
         fetchOrderById,
         createOrder,
         editOrder,
